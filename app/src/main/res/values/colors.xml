@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="p_black">#FF000000</color>
+    <color name="p_white">#FFFFFFFF</color>
+<!--    <color name="primary">#0857f6</color>-->
+<!--    <color name="secondary">#517fee</color>-->
+    <color name="s_white">#A9BBCA</color>
+    <color name="b_white">#B4DBFA</color>
+    <color name="p_green">#10E3CF</color>
+    <color name="darker_grey">#919191</color>
+
+    <color name="main1">#05B4A4</color>
+
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#E3E3E3</color>
+    <color name="secondary">#076F9F</color>
+    <color name="main2">#8EE0D8</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#1E871E</color>
+</resources>

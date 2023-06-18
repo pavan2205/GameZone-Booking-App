@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "190368796011",
+    "project_id": "game-zone-booking",
+    "storage_bucket": "game-zone-booking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190368796011:android:e10438c52cd2fde36f502e",
+        "android_client_info": {
+          "package_name": "com.example.gamezonebooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190368796011-cnlh2vpr8f7bebhg0gjsjp1a9rk047vv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxlLJdZeSw7GAvLHSBETJn8_VD5sfiJSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190368796011-a0ki5r42rbctmbd34u6pt812dmpomf6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:padding="20dp"
+    android:id="@+id/dialogForgot"
+    android:layout_height="match_parent">
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:id="@+id/dialogBox"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/forgotTitle"-->
+<!--            android:text="Forgot Password"-->
+<!--            android:padding="10dp"-->
+<!--            android:textSize="17sp"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:background="@color/secondary"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:textColor="@color/s-white"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/desc"-->
+<!--            android:text="Enter your registered email address"-->
+<!--            android:textSize="16sp"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/forgotTitle"-->
+<!--            android:textColor="@color/secondary"/>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
