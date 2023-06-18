@@ -33,7 +33,7 @@
                     android:layout_gravity="top"
                     android:scaleType="fitXY"
                     android:elevation="20dp"
-                    app:srcCompat="@drawable/homepage_background"
+                    app:srcCompat="@drawable/homepage_top_background"
                     app:shapeAppearanceOverlay="@style/Shape">
                 </com.google.android.material.imageview.ShapeableImageView>
             </LinearLayout>
