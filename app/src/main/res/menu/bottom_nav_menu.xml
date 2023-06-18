@@ -38,8 +38,4 @@
         android:actionLayout="@layout/activity_main"
         android:icon="@drawable/baseline_account_circle_24"/>
 
-
-
-
-
 </menu>
