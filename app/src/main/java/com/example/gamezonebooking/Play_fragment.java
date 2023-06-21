@@ -1,20 +1,17 @@
 package com.example.gamezonebooking;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.firestore.DocumentChange;
@@ -22,7 +19,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
 import com.yalantis.library.Koloda;
 
 import java.util.ArrayList;
@@ -104,6 +100,7 @@ public class Play_fragment extends Fragment {
         fetchGames(this.getContext());
         Log.d("tag", String.valueOf(list.size()));
 
+
         bookbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +134,7 @@ public class Play_fragment extends Fragment {
 
                 swiperAdapter = new SwiperAdapter(context,list);
                 koloda.setAdapter(swiperAdapter);
-                listen l = new listen(context, (ArrayList<games>) gamesDetails);
+                listen l = new listen(context, gamesDetails);
                 koloda.setKolodaListener(l);
 
             }

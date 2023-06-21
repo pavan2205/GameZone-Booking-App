@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,7 +12,11 @@ import java.util.ArrayList;
 public class GamezonesList extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<gamezones> gamezonesList;
+    ArrayList<games>gamezonesList;
+
+
+    public GamezonesList(){}
+
 
 
     @Override
@@ -23,17 +26,19 @@ public class GamezonesList extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recyclerView);
 
+       // gamezonesList=getIntent().getParcelableArrayListExtra("values");
 
-//        Bundle intent = getIntent().getExtras();
-//        gamezonesList = (ArrayList<gamezones>) intent.getSerializable("ARRAYLIST");
-//
-//        Log.d("arrayList",gamezonesList.get(0).name);
-//
-//        gamezonesAdapter adapter=new gamezonesAdapter(gamezonesList);
-//        recyclerView.setHasFixedSize(true);
-//
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(adapter);
+         Log.d("valuess", String.valueOf(gamezonesList.size()));
+//        for(int i=0;i<gamezonesListing.size();i++){
+//            gamezonesList.get(i).name=gamezonesListing.get(i);
+//        }
+
+
+        gamezonesAdapter adapter=new gamezonesAdapter(gamezonesList);
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
     }
 }

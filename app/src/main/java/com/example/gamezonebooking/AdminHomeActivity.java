@@ -12,7 +12,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
 
-        String name=getIntent().getStringExtra("name");
-        Log.d("gamename",name);
+//        String name=getIntent().getStringExtra("name");
+//        Log.d("gamename",name);
     }
 }

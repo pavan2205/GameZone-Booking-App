@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class gamezonesAdapter extends RecyclerView.Adapter<gamezonesAdapter.ViewHolder> {
 
-     ArrayList<gamezones> gamezonesList;
+     ArrayList<games> gamezonesList;
 
-    public gamezonesAdapter(ArrayList<gamezones> gamezonesList) {
+    public gamezonesAdapter(ArrayList<games> gamezonesList) {
         this.gamezonesList=gamezonesList;
     }
 
@@ -28,8 +28,8 @@ public class gamezonesAdapter extends RecyclerView.Adapter<gamezonesAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull gamezonesAdapter.ViewHolder holder, int position) {
-         gamezones list= gamezonesList.get(position);
-         holder.gamzoneName.setText(gamezonesList.get(position).name);
+         games list= (games) gamezonesList.get(position);
+         holder.gamzoneName.setText(((games) gamezonesList.get(position)).name);
 
     }
 
