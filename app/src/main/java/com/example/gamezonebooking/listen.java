@@ -2,6 +2,8 @@ package com.example.gamezonebooking;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
@@ -11,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.yalantis.library.Koloda;
 import com.yalantis.library.KolodaListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 public class listen implements KolodaListener {
     private Context context;
     private ArrayList<games> gamesDetails;
+    GamezonesList gamezonesList;
 
     public listen(Context context, ArrayList<games> gamesDetails) {
         this.context = context;
@@ -47,9 +51,18 @@ public class listen implements KolodaListener {
     public void onCardSingleTap(int i) {
         try{
             Log.d("position",String.valueOf(i));
-            Intent intent =  new Intent(context,AdminHomeActivity.class);
-            intent.putExtra("name",gamesDetails.get(i+1).name);
+            Intent intent =  new Intent(context,GamezonesList.class);
+
+             //intent.putParcelableArrayListExtra("values", (ArrayList<? extends Parcelable>) gamesDetails);
+
+
+//            Bundle b=new Bundle();
+//            b.putSerializable("gamezoneList", (Serializable) gamesDetails.get(i+1));
+//            intent.putExtras(b);
+            //Log.d("values", String.valueOf(gamesDetails.get(i+1).gamezones));
+
             context.startActivity(intent);
+
         }catch (NullPointerException e){
             Log.d("null pointer", String.valueOf(e));
         }

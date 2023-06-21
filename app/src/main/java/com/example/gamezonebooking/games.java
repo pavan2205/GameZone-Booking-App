@@ -1,9 +1,11 @@
 package com.example.gamezonebooking;
 
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class games {
+public class games  {
     String name,desc,img;
     ArrayList<String> gamezones;
 
@@ -40,11 +42,11 @@ public class games {
         this.img = img;
     }
 
-    public List<String> getGameszones() {
+    public ArrayList<String> getGamezones() {
         return gamezones;
     }
 
-    public void setGameszones(ArrayList<String> gamezones) {
+    public void setGamezones(ArrayList<String> gamezones) {
         this.gamezones = gamezones;
     }
 }

@@ -21,8 +21,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     private ArrayList<String> StoreNames= new ArrayList<>();
     private ArrayList<String>StoreImageUrls = new ArrayList<>();
     private Context context;
+
     private  String address;
     private boolean Storeopen;
+
+
+
     public RecycleViewAdapter(ArrayList<String> StoreNames,ArrayList<String>StoreImageUrls,Context context){
         this.StoreNames = StoreNames;
         this.StoreImageUrls = StoreImageUrls;
