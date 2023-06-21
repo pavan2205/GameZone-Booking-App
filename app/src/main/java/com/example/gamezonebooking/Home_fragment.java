@@ -11,8 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -51,8 +54,11 @@ public class Home_fragment extends Fragment {
 
     private ArrayList<String> storeNames = new ArrayList<>();
     private ArrayList<String> storeImageurls = new ArrayList<>();
+
+    private ArrayList<AllStoresDetailsList> allStores = new ArrayList<>();
     private ArrayList<posterUrlsList> posterurls=new ArrayList<>();
     FirebaseFirestore db;
+
     private static final String TAG = "MainActivity";
     private  View view;
 
@@ -91,7 +97,12 @@ public class Home_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
+
+        getNearByStoreImages();
+ 
+       getAllStoreImages();
 
           imageSlider=view.findViewById(R.id.carousel_card_view);
         db=FirebaseFirestore.getInstance();
@@ -103,10 +114,11 @@ public class Home_fragment extends Fragment {
 //        slideModelList.add(new SlideModel("https://assets.mspimages.in/gear/wp-content/uploads/2022/11/GTA_Rockstar_Explained.png"));
 //        slideModelList.add(new SlideModel("https://www.adrenaline.com.br/wp-content/plugins/seox-image-magick/imagick_convert.php?width=1200&height=545&format=webp&quality=91&imagick=/wp-content/uploads/2022/08/the-last-of-us-part-i_2.jpg"));
 
+
         return view;
     }
 
-    private void getImages(){
+    private void getNearByStoreImages(){
 
         db.collection("gameposters").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -168,13 +180,46 @@ public class Home_fragment extends Fragment {
 
 
     }
+
+    public void getAllStoreImages(){
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",true));
+        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
+        initRecyclerView(view);
+
+    }
     private void initRecyclerView(@NonNull View view){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = view.findViewById(R.id.nearest_store_recycler_view);
+        RecyclerView allStoreRecyclerview = view.findViewById(R.id.all_store_list);
         recyclerView.setLayoutManager(layoutManager);
+
+        allStoreRecyclerview.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false));
+
+        //nearest store
         RecycleViewAdapter adapter = new RecycleViewAdapter(storeNames,storeImageurls,view.getContext());
         recyclerView.setAdapter(adapter);
+        AllStoreRecyclerViewAdapter allStoreRecyclerViewAdapter = new AllStoreRecyclerViewAdapter(allStores,view.getContext());
+        //all stores
+        allStoreRecyclerview.setMinimumHeight(allStores.size()*780);
+        allStoreRecyclerview.setAdapter(allStoreRecyclerViewAdapter);
+        allStoreRecyclerview.setNestedScrollingEnabled(false);
     }
+
 }

@@ -15,13 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
     private ArrayList<String> StoreNames= new ArrayList<>();
     private ArrayList<String>StoreImageUrls = new ArrayList<>();
     private Context context;
+
+    private  String address;
+    private boolean Storeopen;
+
+
 
     public RecycleViewAdapter(ArrayList<String> StoreNames,ArrayList<String>StoreImageUrls,Context context){
         this.StoreNames = StoreNames;
@@ -34,7 +38,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.nearest_store_card,parent,false);
-
         return new ViewHolder(view);
     }
 
@@ -55,7 +58,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         return StoreImageUrls.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView storeImage;
         TextView storeName;
 
@@ -67,3 +70,5 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
 }
+
+
