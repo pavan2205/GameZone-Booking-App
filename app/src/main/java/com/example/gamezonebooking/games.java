@@ -5,7 +5,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class games  {
+public class games extends ArrayList<Parcelable> {
     String name,desc,img;
     ArrayList<String> gamezones;
 

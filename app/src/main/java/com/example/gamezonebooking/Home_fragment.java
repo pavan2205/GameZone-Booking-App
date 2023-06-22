@@ -1,5 +1,8 @@
 package com.example.gamezonebooking;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -9,11 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -100,13 +106,10 @@ public class Home_fragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
 
-        getNearByStoreImages();
- 
-       getAllStoreImages();
-
-          imageSlider=view.findViewById(R.id.carousel_card_view);
+       imageSlider=view.findViewById(R.id.carousel_card_view);
         db=FirebaseFirestore.getInstance();
-        getImages();
+        getNearByStoreImages();
+        getAllStoreImages();
 
 //        slideModelList.add(new SlideModel("https://www.heypoorplayer.com/wp-content/uploads/2023/03/WWE-2k23.png"));
 //        slideModelList.add(new SlideModel("https://www.global-esports.news/wp-content/uploads/2022/09/FIFA-23.png"));
@@ -217,9 +220,29 @@ public class Home_fragment extends Fragment {
         recyclerView.setAdapter(adapter);
         AllStoreRecyclerViewAdapter allStoreRecyclerViewAdapter = new AllStoreRecyclerViewAdapter(allStores,view.getContext());
         //all stores
-        allStoreRecyclerview.setMinimumHeight(allStores.size()*780);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager()
+                .getDefaultDisplay()
+                .getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+
+// Get the screen height in pixels
+        int screenHeight = displayMetrics.heightPixels;
+        allStoreRecyclerview.setMinimumHeight(allStores.size()*screenHeight/2);
         allStoreRecyclerview.setAdapter(allStoreRecyclerViewAdapter);
         allStoreRecyclerview.setNestedScrollingEnabled(false);
+        allStoreRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    recyclerView.stopScroll();
+                }
+            }
+        });
     }
 
 }

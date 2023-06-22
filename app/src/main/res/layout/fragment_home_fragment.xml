@@ -57,10 +57,11 @@
                 app:corner_radius="20"
                 android:layout_height="190dp"
                 android:layout_gravity="center"
-                android:layout_margin="20dp"
+                android:layout_margin="5dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="20dp" >
-            </androidx.cardview.widget.CardView>
+
+            </com.denzcoskun.imageslider.ImageSlider>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,8 +70,7 @@
                 android:textSize="20dp"
                 android:padding="20dp"
                 android:textAlignment="center"/>
-                android:layout_margin="5dp">
-            </com.denzcoskun.imageslider.ImageSlider>
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,23 +99,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
                     android:id="@+id/all_store_list"
                     >
                 </androidx.recyclerview.widget.RecyclerView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Powered by prax"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:padding="20dp"
-                    android:layout_marginBottom="100dp"
-                    android:textAlignment="center"/>
             </LinearLayout>
         </LinearLayout>
 

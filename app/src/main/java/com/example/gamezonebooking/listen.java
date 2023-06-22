@@ -56,6 +56,8 @@ public class listen implements KolodaListener {
              //intent.putParcelableArrayListExtra("values", (ArrayList<? extends Parcelable>) gamesDetails);
 
 
+
+
 //            Bundle b=new Bundle();
 //            b.putSerializable("gamezoneList", (Serializable) gamesDetails.get(i+1));
 //            intent.putExtras(b);

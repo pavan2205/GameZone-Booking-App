@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GamezonesList extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<games>gamezonesList;
+    ArrayList<games> gamezonesList;
 
 
     public GamezonesList(){}
@@ -26,12 +26,7 @@ public class GamezonesList extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recyclerView);
 
-       // gamezonesList=getIntent().getParcelableArrayListExtra("values");
 
-         Log.d("valuess", String.valueOf(gamezonesList.size()));
-//        for(int i=0;i<gamezonesListing.size();i++){
-//            gamezonesList.get(i).name=gamezonesListing.get(i);
-//        }
 
 
         gamezonesAdapter adapter=new gamezonesAdapter(gamezonesList);
