@@ -3,19 +3,27 @@ package com.example.gamezonebooking;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class games extends ArrayList<Parcelable> {
-    String name,desc,img;
-    ArrayList<String> gamezones;
+public class games {
+    String id,name,desc,img;
+    ArrayList<gamezones> gamezones;
 
     public games(){}
 
-    public games(String name, String desc, String img, ArrayList<String> gamezones) {
+    public games(String id, String name, String desc, String img, ArrayList<gamezones> gamezones) {
+        this.id = id;
         this.name = name;
         this.desc = desc;
         this.img = img;
         this.gamezones = gamezones;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -42,11 +50,11 @@ public class games extends ArrayList<Parcelable> {
         this.img = img;
     }
 
-    public ArrayList<String> getGamezones() {
+    public ArrayList<gamezones> getGamezone() {
         return gamezones;
     }
 
-    public void setGamezones(ArrayList<String> gamezones) {
+    public void setGamezone(ArrayList<gamezones> gamezones) {
         this.gamezones = gamezones;
     }
 }

@@ -65,6 +65,8 @@ public class Home_fragment extends Fragment {
     private ArrayList<posterUrlsList> posterurls=new ArrayList<>();
     FirebaseFirestore db;
 
+    List<SlideModel> slideModelList = new ArrayList<>();
+
     private static final String TAG = "MainActivity";
     private  View view;
 
@@ -96,7 +98,9 @@ public class Home_fragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
+
     }
 
     @Override
@@ -108,7 +112,10 @@ public class Home_fragment extends Fragment {
 
        imageSlider=view.findViewById(R.id.carousel_card_view);
         db=FirebaseFirestore.getInstance();
-        getNearByStoreImages();
+
+
+            getNearByStoreImages();
+
         getAllStoreImages();
 
 //        slideModelList.add(new SlideModel("https://www.heypoorplayer.com/wp-content/uploads/2023/03/WWE-2k23.png"));
@@ -123,6 +130,8 @@ public class Home_fragment extends Fragment {
 
     private void getNearByStoreImages(){
 
+
+
         db.collection("gameposters").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -136,13 +145,19 @@ public class Home_fragment extends Fragment {
                         posterurls.add(dc.getDocument().toObject(posterUrlsList.class));
                     }
                 }
-                List<SlideModel> slideModelList=new ArrayList<>();
 
-                for(posterUrlsList urls:posterurls){
-                    slideModelList.add(new SlideModel(urls.image));
-                    Log.d("urls",urls.image);
-                }
-                imageSlider.setImageList(slideModelList,true);
+
+if(slideModelList.size()==0) {
+    for (posterUrlsList urls : posterurls) {
+
+
+        slideModelList.add(new SlideModel(urls.image));
+
+        Log.d("urls", urls.image);
+    }
+}
+    imageSlider.setImageList(slideModelList, true);
+
             }
         });
 
@@ -186,23 +201,26 @@ public class Home_fragment extends Fragment {
 
     public void getAllStoreImages(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",true));
-        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
-        initRecyclerView(view);
+        if(allStores.size()==0) {
+            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
+            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", true));
+            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
+            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
+            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
+            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
+            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
+            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", false));
+        }
+            initRecyclerView(view);
+
 
     }
     private void initRecyclerView(@NonNull View view){

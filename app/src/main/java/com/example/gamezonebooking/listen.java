@@ -50,19 +50,10 @@ public class listen implements KolodaListener {
     @Override
     public void onCardSingleTap(int i) {
         try{
+
             Log.d("position",String.valueOf(i));
             Intent intent =  new Intent(context,GamezonesList.class);
-
-             //intent.putParcelableArrayListExtra("values", (ArrayList<? extends Parcelable>) gamesDetails);
-
-
-
-
-//            Bundle b=new Bundle();
-//            b.putSerializable("gamezoneList", (Serializable) gamesDetails.get(i+1));
-//            intent.putExtras(b);
-            //Log.d("values", String.valueOf(gamesDetails.get(i+1).gamezones));
-
+            intent.putExtra("id",gamesDetails.get(i+1).id);
             context.startActivity(intent);
 
         }catch (NullPointerException e){

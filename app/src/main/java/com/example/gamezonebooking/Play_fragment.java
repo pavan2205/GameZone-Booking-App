@@ -132,6 +132,7 @@ public class Play_fragment extends Fragment {
                     }
                 }
 
+
                 swiperAdapter = new SwiperAdapter(context,list);
                 koloda.setAdapter(swiperAdapter);
                 listen l = new listen(context, gamesDetails);
