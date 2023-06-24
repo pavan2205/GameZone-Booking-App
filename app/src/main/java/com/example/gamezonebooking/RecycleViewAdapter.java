@@ -2,6 +2,8 @@ package com.example.gamezonebooking;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +20,14 @@ import java.util.ArrayList;
 
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
-    private ArrayList<String> StoreNames= new ArrayList<>();
-    private ArrayList<String>StoreImageUrls = new ArrayList<>();
+    ArrayList<AllStoresDetailsList> storeDetails;
     private Context context;
 
-    private  String address;
-    private boolean Storeopen;
 
 
 
-    public RecycleViewAdapter(ArrayList<String> StoreNames,ArrayList<String>StoreImageUrls,Context context){
-        this.StoreNames = StoreNames;
-        this.StoreImageUrls = StoreImageUrls;
+    public RecycleViewAdapter(ArrayList<AllStoresDetailsList> storeDetails,Context context){
+        this.storeDetails = storeDetails;
         this.context = context;
     }
 
@@ -43,19 +41,28 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Picasso.get().load(StoreImageUrls.get(position)).into(holder.storeImage);
-        holder.storeName.setText(StoreNames.get(position));
-        holder.storeImage.setOnClickListener(new View.OnClickListener() {
+        AllStoresDetailsList store = storeDetails.get(position);
+        Picasso.get().load(store.image).into(holder.storeImage);
+        holder.storeName.setText(store.name);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,StoreNames.get(position),Toast.LENGTH_SHORT);
+                Intent intent = new Intent(v.getContext(), BookScreen.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name",store.name);
+                bundle.putString("image",store.image);
+                bundle.putString("address",store.Address);
+                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return StoreImageUrls.size();
+        return storeDetails.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

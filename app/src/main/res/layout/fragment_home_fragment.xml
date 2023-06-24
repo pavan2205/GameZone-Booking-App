@@ -107,6 +107,16 @@
                     >
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="powered by Gaming world"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:padding="30dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="70dp"
+                android:textAlignment="center"/>
         </LinearLayout>
 
     </ScrollView>

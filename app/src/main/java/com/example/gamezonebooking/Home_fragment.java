@@ -145,43 +145,6 @@ public class Home_fragment extends Fragment {
                 imageSlider.setImageList(slideModelList,true);
             }
         });
-
-
-
-
-
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-
-        storeImageurls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        storeNames.add("Havasu Falls");
-
-        storeImageurls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        storeNames.add("Trondheim");
-
-        storeImageurls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        storeNames.add("Portugal");
-
-        storeImageurls.add("https://i.redd.it/j6myfqglup501.jpg");
-        storeNames.add("Rocky Mountain National Park");
-
-        storeImageurls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        storeNames.add("Mahahual");
-
-        storeImageurls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        storeNames.add("Frozen Lake");
-
-        storeImageurls.add("https://i.redd.it/glin0nwndo501.jpg");
-        storeNames.add("White Sands Desert");
-
-        storeImageurls.add("https://i.redd.it/obx4zydshg601.jpg");
-        storeNames.add("Austrailia");
-
-        storeImageurls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        storeNames.add("Washington");
-
-        initRecyclerView(view);
-
-
     }
 
     public void getAllStoreImages(){
@@ -203,8 +166,9 @@ public class Home_fragment extends Fragment {
         allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
         allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
         initRecyclerView(view);
-
     }
+
+
     private void initRecyclerView(@NonNull View view){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
@@ -216,7 +180,7 @@ public class Home_fragment extends Fragment {
         allStoreRecyclerview.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false));
 
         //nearest store
-        RecycleViewAdapter adapter = new RecycleViewAdapter(storeNames,storeImageurls,view.getContext());
+        RecycleViewAdapter adapter = new RecycleViewAdapter(allStores,view.getContext());
         recyclerView.setAdapter(adapter);
         AllStoreRecyclerViewAdapter allStoreRecyclerViewAdapter = new AllStoreRecyclerViewAdapter(allStores,view.getContext());
         //all stores
@@ -228,10 +192,10 @@ public class Home_fragment extends Fragment {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
+        Log.d("screen Size", String.valueOf(height));
 
-// Get the screen height in pixels
-        int screenHeight = displayMetrics.heightPixels;
-        allStoreRecyclerview.setMinimumHeight(allStores.size()*screenHeight/2);
+        // Get the screen height in pixels
+        allStoreRecyclerview.setMinimumHeight(allStores.size() * (height+100)/2);
         allStoreRecyclerview.setAdapter(allStoreRecyclerViewAdapter);
         allStoreRecyclerview.setNestedScrollingEnabled(false);
         allStoreRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -244,5 +208,4 @@ public class Home_fragment extends Fragment {
             }
         });
     }
-
 }
