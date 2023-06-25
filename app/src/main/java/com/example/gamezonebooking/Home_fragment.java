@@ -3,7 +3,11 @@ package com.example.gamezonebooking;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,14 +23,18 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -54,6 +62,9 @@ public class Home_fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button yesBtn,noBtn;
+    ImageButton signoutBtn;
 
 
     ImageSlider imageSlider;
@@ -111,11 +122,48 @@ public class Home_fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
 
        imageSlider=view.findViewById(R.id.carousel_card_view);
+        signoutBtn=(ImageButton) view.findViewById(R.id.signoutBtn);
+
+
         db=FirebaseFirestore.getInstance();
 
 
-            getNearByStoreImages();
+        signoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                ShowCustomDialogBox(getView());
+                Dialog dialog=new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setCancelable(false);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+                 view  = getActivity().getLayoutInflater().inflate(R.layout.layout_custom_dialog, null);
+                dialog.setContentView(view);
+
+                yesBtn=view.findViewById(R.id.btnyes);
+                noBtn=view.findViewById(R.id.btnno);
+
+                yesBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent=new Intent(getContext(),LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                noBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
+
+
+        getNearByStoreImages();
         getAllStoreImages();
 
 //        slideModelList.add(new SlideModel("https://www.heypoorplayer.com/wp-content/uploads/2023/03/WWE-2k23.png"));
@@ -126,6 +174,10 @@ public class Home_fragment extends Fragment {
 
 
         return view;
+    }
+
+    private void ShowCustomDialogBox(View view) {
+
     }
 
     private void getNearByStoreImages(){
@@ -160,47 +212,11 @@ if(slideModelList.size()==0) {
 
             }
         });
-
-
-
-
-
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-
-        storeImageurls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        storeNames.add("Havasu Falls");
-
-        storeImageurls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        storeNames.add("Trondheim");
-
-        storeImageurls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        storeNames.add("Portugal");
-
-        storeImageurls.add("https://i.redd.it/j6myfqglup501.jpg");
-        storeNames.add("Rocky Mountain National Park");
-
-        storeImageurls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        storeNames.add("Mahahual");
-
-        storeImageurls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        storeNames.add("Frozen Lake");
-
-        storeImageurls.add("https://i.redd.it/glin0nwndo501.jpg");
-        storeNames.add("White Sands Desert");
-
-        storeImageurls.add("https://i.redd.it/obx4zydshg601.jpg");
-        storeNames.add("Austrailia");
-
-        storeImageurls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        storeNames.add("Washington");
-
-        initRecyclerView(view);
-
-
     }
 
     public void getAllStoreImages(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
         if(allStores.size()==0) {
             allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
             allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
@@ -221,8 +237,28 @@ if(slideModelList.size()==0) {
         }
             initRecyclerView(view);
 
+//
+//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",true));
+//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
+//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
+//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
+//        initRecyclerView(view);
 
     }
+
+
     private void initRecyclerView(@NonNull View view){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
@@ -234,7 +270,7 @@ if(slideModelList.size()==0) {
         allStoreRecyclerview.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false));
 
         //nearest store
-        RecycleViewAdapter adapter = new RecycleViewAdapter(storeNames,storeImageurls,view.getContext());
+        RecycleViewAdapter adapter = new RecycleViewAdapter(allStores,view.getContext());
         recyclerView.setAdapter(adapter);
         AllStoreRecyclerViewAdapter allStoreRecyclerViewAdapter = new AllStoreRecyclerViewAdapter(allStores,view.getContext());
         //all stores
@@ -246,10 +282,10 @@ if(slideModelList.size()==0) {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
+        Log.d("screen Size", String.valueOf(height));
 
-// Get the screen height in pixels
-        int screenHeight = displayMetrics.heightPixels;
-        allStoreRecyclerview.setMinimumHeight(allStores.size()*screenHeight/2);
+        // Get the screen height in pixels
+        allStoreRecyclerview.setMinimumHeight(allStores.size() * (height)/2);
         allStoreRecyclerview.setAdapter(allStoreRecyclerViewAdapter);
         allStoreRecyclerview.setNestedScrollingEnabled(false);
         allStoreRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -262,5 +298,4 @@ if(slideModelList.size()==0) {
             }
         });
     }
-
 }

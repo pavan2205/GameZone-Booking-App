@@ -2,13 +2,18 @@ package com.example.gamezonebooking;
 
 public class gamezones {
     String name;
-    String location;
+    String address;
+    String image;
+    String status;
+
 
     public gamezones(){}
 
-    public gamezones(String name, String location) {
+    public gamezones(String name, String address, String image, String status) {
         this.name = name;
-        this.location = location;
+        this.address = address;
+        this.image = image;
+        this.status = status;
     }
 
     public String getName() {
@@ -19,11 +24,27 @@ public class gamezones {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

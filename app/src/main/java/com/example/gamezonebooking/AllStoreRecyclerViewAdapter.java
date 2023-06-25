@@ -1,8 +1,10 @@
 package com.example.gamezonebooking;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +44,19 @@ public class AllStoreRecyclerViewAdapter extends RecyclerView.Adapter<AllStoreRe
         if(!store.openOrClose){
             holder.StoreOpen.setTextColor(Color.RED);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), BookScreen.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name",store.name);
+                bundle.putString("image",store.image);
+                bundle.putString("address",store.Address);
+                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
 

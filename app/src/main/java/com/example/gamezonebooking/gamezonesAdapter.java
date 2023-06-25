@@ -2,10 +2,13 @@ package com.example.gamezonebooking;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -32,7 +35,9 @@ public class gamezonesAdapter extends RecyclerView.Adapter<gamezonesAdapter.View
     public void onBindViewHolder(@NonNull gamezonesAdapter.ViewHolder holder, int position) {
          gamezones list= gamezonesList.get(position);
          holder.gamzoneName.setText(list.name);
-         holder.location.setText(list.getLocation());
+         Picasso.get().load(list.getImage()).into(holder.storeImage);
+         holder.location.setText(list.getAddress());
+         holder.status.setText(list.getStatus());
     }
 
     @Override
@@ -43,12 +48,15 @@ public class gamezonesAdapter extends RecyclerView.Adapter<gamezonesAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView gamzoneName,location;
+        TextView status;
+        ImageView storeImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            gamzoneName=itemView.findViewById(R.id.name);
-            location=itemView.findViewById(R.id.location);
+            status=itemView.findViewById(R.id.storestatus);
+            storeImage=itemView.findViewById(R.id.storeImage);
+            gamzoneName=itemView.findViewById(R.id.storename);
+            location=itemView.findViewById(R.id.storeaddress);
         }
 
     }

@@ -31,6 +31,20 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
+            <ImageButton
+                android:id="@+id/signoutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="66dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="169dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="1dp"
+                android:layout_toEndOf="@+id/textView2"
+                android:background="#00000000"
+                android:src="@drawable/ic_baseline_login_24" />
+
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
@@ -107,6 +121,16 @@
                     >
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="powered by Gaming world"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:padding="30dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="70dp"
+                android:textAlignment="center"/>
         </LinearLayout>
 
     </ScrollView>
