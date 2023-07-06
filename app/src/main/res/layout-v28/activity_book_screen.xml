@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookScreen"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:backgroundTint="@color/white"
+        app:cardElevation="21dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="100dp"
+                android:layout_margin="10dp"
+                >
+                <ImageView
+                    android:id="@+id/store_image"
+                    android:layout_width="50dp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/darker_grey"
+                    android:src="@color/grey" />
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <TextView
+                        android:id="@+id/store_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Game bot"
+                        android:textSize="35dp"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/open_or_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="open"
+                        android:textSize="15dp"
+                        tools:ignore="TextSizeCheck" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/store_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text=""
+                    android:textSize="0dp"
+                    tools:ignore="TextSizeCheck" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/store_images_carousel"
+                android:layout_width="match_parent"
+                app:auto_cycle="false"
+                app:delay="0"
+                app:period="3000"
+                app:placeholder="@color/darker_grey"
+                app:error_image="@color/p_black"
+                android:layout_height="190dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardElevation="40dp"
+                tools:ignore="ExtraText">
+
+                >
+            </com.denzcoskun.imageslider.ImageSlider>
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="30dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="21dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/select_Date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Select The Date "
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="30dp"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/set_dateBtn"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:foreground="@drawable/add_icon"
+                    android:backgroundTint="@color/darker_grey"
+                    app:cardCornerRadius="60dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="10dp"
+                    />
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginBottom="30dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="21dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/select_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Select The Time"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="30dp"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/set_timeBtn"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:foreground="@drawable/add_icon"
+                    android:backgroundTint="@color/darker_grey"
+                    app:cardCornerRadius="60dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="10dp"
+                    />
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+</LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/play_game_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/todo"
+        android:elevation="21dp"
+        android:src="@drawable/forward_arrow"
+        android:textAlignment="center"
+        app:backgroundTint="@color/primary"
+        app:fabCustomSize="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:tooltipText="continue"
+        app:maxImageSize="40dp"
+        app:pressedTranslationZ="12dp"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+        app:shapeAppearanceOverlay="@style/Shape2">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
+
+
+
+</RelativeLayout>
+
+
+
+
