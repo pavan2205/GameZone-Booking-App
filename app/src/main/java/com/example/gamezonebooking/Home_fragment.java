@@ -4,14 +4,17 @@ import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,9 +75,11 @@ public class Home_fragment extends Fragment {
     private ArrayList<String> storeNames = new ArrayList<>();
     private ArrayList<String> storeImageurls = new ArrayList<>();
 
-    private ArrayList<AllStoresDetailsList> allStores = new ArrayList<>();
+    private ArrayList<AdminProfileModel> allStores = new ArrayList<>();
     private ArrayList<posterUrlsList> posterurls=new ArrayList<>();
     FirebaseFirestore db;
+
+    ProgressDialog progressDialog;
 
     List<SlideModel> slideModelList = new ArrayList<>();
 
@@ -123,6 +128,7 @@ public class Home_fragment extends Fragment {
 
        imageSlider=view.findViewById(R.id.carousel_card_view);
         signoutBtn=(ImageButton) view.findViewById(R.id.signoutBtn);
+        progressDialog=new ProgressDialog(getContext());
 
 
         db=FirebaseFirestore.getInstance();
@@ -218,45 +224,27 @@ if(slideModelList.size()==0) {
     public void getAllStoreImages(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
-        if(allStores.size()==0) {
-            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
-            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", true));
-            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
-            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
-            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
-            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", true));
-            allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg", "gameBot", "Bunts hostel", false));
-            allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg", "gameBot", "Bunts hostel", false));
-        }
-            initRecyclerView(view);
 
-//
-//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",true));
-//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",true));
-//        allStores.add(new AllStoresDetailsList("https://i.imgur.com/ZcLLrkY.jpg","gameBot","Bunts hostel",false));
-//        allStores.add(new AllStoresDetailsList("https://i.redd.it/k98uzl68eh501.jpg","gameBot","Bunts hostel",false));
-//        initRecyclerView(view);
+            if(allStores.size()==0) {
+                db.collection("Allgamezones").addSnapshotListener(new EventListener<QuerySnapshot>() {
 
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+                                allStores.add(dc.getDocument().toObject(AdminProfileModel.class));
+                            }
+                        }
+                    }
+                });
+            }
+
+        initRecyclerView(view);
     }
 
 

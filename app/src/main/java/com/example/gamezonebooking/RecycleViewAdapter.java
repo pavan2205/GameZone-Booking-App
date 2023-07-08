@@ -20,13 +20,13 @@ import java.util.ArrayList;
 
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
-    ArrayList<AllStoresDetailsList> storeDetails;
+    ArrayList<AdminProfileModel> storeDetails;
     private Context context;
 
 
 
 
-    public RecycleViewAdapter(ArrayList<AllStoresDetailsList> storeDetails,Context context){
+    public RecycleViewAdapter(ArrayList<AdminProfileModel> storeDetails, Context context){
         this.storeDetails = storeDetails;
         this.context = context;
     }
@@ -41,19 +41,19 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        AllStoresDetailsList store = storeDetails.get(position);
-        Picasso.get().load(store.image).into(holder.storeImage);
-        holder.storeName.setText(store.name);
+        AdminProfileModel store = storeDetails.get(position);
+        Picasso.get().load(store.images.get(0)).into(holder.storeImage);
+        holder.storeName.setText(store.storename);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), BookScreen.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("name",store.name);
-                bundle.putString("image",store.image);
-                bundle.putString("address",store.Address);
-                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
+                bundle.putString("name",store.storename);
+                bundle.putString("image",store.images.get(0));
+                bundle.putString("address",store.address);
+//                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }

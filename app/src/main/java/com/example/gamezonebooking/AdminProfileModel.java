@@ -18,6 +18,8 @@ public class AdminProfileModel {
     ArrayList<String>games;
     ArrayList<String>images;
 
+    AdminProfileModel(){}
+
     public AdminProfileModel(String storename, String contact, String address, String city, String state, String pincode, String screencount, String ps5count, String ps4count, String xboxcount, String poolcount, ArrayList<String> games, ArrayList<String> images) {
         this.storename = storename;
         this.contact = contact;

@@ -1,14 +1,18 @@
 package com.example.gamezonebooking;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,10 +25,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -32,7 +40,9 @@ import com.google.firebase.storage.UploadTask;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class AdminDetails3 extends AppCompatActivity {
 
@@ -52,6 +62,8 @@ public class AdminDetails3 extends AppCompatActivity {
     FirebaseFirestore db;
     StorageReference storageReference;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +73,8 @@ public class AdminDetails3 extends AppCompatActivity {
         finishBtn=findViewById(R.id.finish_btn);
         db=FirebaseFirestore.getInstance();
         progressDialog=new ProgressDialog(this);
+
+
 
 
         imagePickerLauncher = registerForActivityResult(
@@ -82,46 +96,44 @@ public class AdminDetails3 extends AppCompatActivity {
                             Uri imageUri = data.getData();
                             imageUriList.add(imageUri);
                         }
+                        uploadImagesToFirebase();
                         // Now you have the selected image URIs in the imageUriList ArrayList
                         // You can perform further operations with the selected images here
-                        imagesList = findViewById(R.id.image_List);
-                        imagesList.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-                        ImageAdapter adapter = new ImageAdapter(imageUriList);
-                        imagesList.setAdapter(adapter);
+
+//
 
 
-
-                        for(int i=0;i<imageUriList.size();i++) {
-                            progressDialog.setTitle("uploading");
-                            progressDialog.show();
-                            String filename = getFileName(imageUriList.get(i));
-                            Log.d("filename",filename);
-                            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                            storageReference = storageRef.child("images/" + filename);
-
-                            Log.d("imageuri", String.valueOf(imageUriList.get(i)));
-                            UploadTask uploadTask = storageReference.putFile(imageUriList.get(i));
-                            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            if(progressDialog.isShowing()){progressDialog.dismiss();};
-                                            String url = String.valueOf(uri);
-                                            downloadImageUrl.add(url);
-
-                                            Toast.makeText(AdminDetails3.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(AdminDetails3.this, "Failed to Upload", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
+//                        for(int i=0;i<imageUriList.size();i++) {
+//                            progressDialog.setTitle("uploading");
+//                            progressDialog.show();
+//                            String filename = getFileName(imageUriList.get(i));
+//                            Log.d("filename",filename);
+//                            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+//                            storageReference = storageRef.child("images/" + filename);
+//
+//                            Log.d("imageuri", String.valueOf(imageUriList.get(i)));
+//                            UploadTask uploadTask = storageReference.putFile(imageUriList.get(i));
+//                            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                                @Override
+//                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                        @Override
+//                                        public void onSuccess(Uri uri) {
+//                                            if(progressDialog.isShowing()){progressDialog.dismiss();};
+//                                            String url = String.valueOf(uri);
+//                                            downloadImageUrl.add(url);
+//
+//                                            Toast.makeText(AdminDetails3.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+//                                }
+//                            }).addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    Toast.makeText(AdminDetails3.this, "Failed to Upload", Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+//                        }
 
 
                     }
@@ -136,8 +148,11 @@ public class AdminDetails3 extends AppCompatActivity {
 
                 // Start the intent using the ActivityResultLauncher
                 imagePickerLauncher.launch(intent);
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select Images"), 1);
             }
         });
+
 
         imagesList = findViewById(R.id.image_List);
         imagesList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -171,7 +186,7 @@ public class AdminDetails3 extends AppCompatActivity {
 //                progressDialog.show();
 
                     AdminProfileModel adminProfileModel=new AdminProfileModel(store,contact,address,city,state,pincode,screencount,ps5count,ps4count,xboxcount,poolcount,gamesList,downloadImageUrl);
-                    db.collection("gamezonesList").add(adminProfileModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    db.collection("Allgamezones").add(adminProfileModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             if(progressDialog.isShowing())progressDialog.dismiss();;
@@ -181,6 +196,7 @@ public class AdminDetails3 extends AppCompatActivity {
                 }
         });
     }
+
     @SuppressLint("Range")
     public String getFileName(Uri filepath){
         String result=null;
@@ -201,6 +217,49 @@ public class AdminDetails3 extends AppCompatActivity {
             }
         }
         return result;
+    }
+    private void uploadImagesToFirebase() {
+        progressDialog.setTitle("uploading...");
+        progressDialog.show();
+        for (int i = 0; i < imageUriList.size(); i++) {
+            Uri imageUri = imageUriList.get(i);
+            String fileName = "image_" + i + ".jpg";
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            storageReference = storageRef.child("images/" + fileName);
+
+            UploadTask uploadTask = storageReference.putFile(imageUri);
+            int finalI = i;
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // Image uploaded successfully, get the download URL
+                    Task<Uri> downloadUriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    downloadUriTask.addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                Uri downloadUri = task.getResult();
+                                Log.d("success12", String.valueOf(downloadUri));
+                                downloadImageUrl.add(downloadUri.toString());
+                                Toast.makeText(AdminDetails3.this, "Successfully uploaded", Toast.LENGTH_SHORT).show();
+
+                                if(finalI ==imageUriList.size()-1){
+                                    if(progressDialog.isShowing()){
+                                        progressDialog.dismiss();
+                                    }
+                                }
+                            } else {
+                                Log.e(TAG, "Error getting download URL: " + task.getException());
+                            }
+                        }
+                    });
+                }
+            });
+            imagesList = findViewById(R.id.image_List);
+            imagesList.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+            ImageAdapter adapter = new ImageAdapter(imageUriList);
+            imagesList.setAdapter(adapter);
+        }
     }
 
 }

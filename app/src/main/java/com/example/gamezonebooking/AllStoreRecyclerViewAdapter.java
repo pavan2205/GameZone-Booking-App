@@ -21,9 +21,9 @@ import java.util.ArrayList;
 
 public class AllStoreRecyclerViewAdapter extends RecyclerView.Adapter<AllStoreRecyclerViewAdapter.ViewHolder> {
 
-     ArrayList<AllStoresDetailsList> storeDetails;
+     ArrayList<AdminProfileModel> storeDetails;
      Context context;
-    public AllStoreRecyclerViewAdapter(ArrayList<AllStoresDetailsList>storeDetails,Context context){
+    public AllStoreRecyclerViewAdapter(ArrayList<AdminProfileModel> storeDetails, Context context){
         this.storeDetails = storeDetails;
         this.context = context;
     }
@@ -36,23 +36,23 @@ public class AllStoreRecyclerViewAdapter extends RecyclerView.Adapter<AllStoreRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        AllStoresDetailsList store = storeDetails.get(position);
-        Picasso.get().load(store.image).into(holder.allStoresImage);
-        holder.allStoreName.setText(store.name);
-        holder.allStoreAddress.setText(store.Address);
-        holder.StoreOpen.setText(store.openOrClose?"open":"closed");
-        if(!store.openOrClose){
-            holder.StoreOpen.setTextColor(Color.RED);
-        }
+        AdminProfileModel store = storeDetails.get(position);
+        Picasso.get().load(store.images.get(0)).into(holder.allStoresImage);
+        holder.allStoreName.setText(store.storename);
+        holder.allStoreAddress.setText(store.address);
+//        holder.StoreOpen.setText(store.openOrClose?"open":"closed");
+//        if(!store.openOrClose){
+//            holder.StoreOpen.setTextColor(Color.RED);
+//        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), BookScreen.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("name",store.name);
-                bundle.putString("image",store.image);
-                bundle.putString("address",store.Address);
-                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
+                bundle.putString("name",store.storename);
+                bundle.putString("image",store.images.get(0));
+                bundle.putString("address",store.address);
+//                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }
