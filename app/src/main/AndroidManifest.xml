@@ -4,6 +4,7 @@
     package="com.example.gamezonebooking">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -18,37 +19,67 @@
         android:theme="@style/Theme.GameZoneBooking"
         tools:targetApi="31">
         <activity
+            android:name=".AdminDetails3"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".AdminDetails2"
+            android:exported="false" />
+        <activity
+            android:name=".RazorPayment"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".Adminlogin"
+            android:exported="false" />
+        <activity
+            android:name=".AdminDetails"
+            android:exported="false" />
+        <activity
             android:name=".BookScreen"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".GamezonesList"
             android:exported="false" />
         <activity
             android:name=".AdminHomeActivity"
-            android:exported="false" />
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
     </application>
 

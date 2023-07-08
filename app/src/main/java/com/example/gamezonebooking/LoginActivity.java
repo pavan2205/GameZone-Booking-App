@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email,password;
     Button registerBtn;
     ImageView googleBtn;
-    ConstraintLayout register;
+    ConstraintLayout register,admin;
 
     androidx.appcompat.widget.SwitchCompat switchuser;
 
@@ -64,25 +64,29 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser=mAuth.getCurrentUser();
+        Log.d("currentUser", String.valueOf(currentUser));
         if(currentUser!=null){
-            String userId=mAuth.getCurrentUser().getUid();
-            DocumentReference documentReference=db.collection("users").document(userId);
-            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    String userType=value.getString("userType");
-                    Log.d("userType",userType);
-                    if(userType.equals("admin")){
-                        Intent intent=new Intent(LoginActivity.this,AdminHomeActivity.class);
-                        startActivity(intent);
-                    }
-                    else if(userType.equals("user")){
-                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+//            String userId=mAuth.getCurrentUser().getUid();
+//            DocumentReference documentReference=db.collection("users").document(userId);
+//            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//                @Override
+//                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+//                    String userType=value.getString("userType");
+//                    Log.d("userType",userType);
+//                    if(userType.equals("admin")){
+//                        Intent intent=new Intent(LoginActivity.this,AdminHomeActivity.class);
+//                        startActivity(intent);
+//                    }
+//                    else if(userType.equals("user")){
+//                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                }
+//            });
+            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                         finish();
-                    }
-                }
-            });
         }
     }
 
@@ -99,8 +103,9 @@ public class LoginActivity extends AppCompatActivity {
         password=findViewById(R.id.password1);
         registerBtn=findViewById(R.id.loginbtn);
         register=findViewById(R.id.registerText);
+        admin=findViewById(R.id.adminText);
         googleBtn=findViewById(R.id.googlebtn);
-        switchuser=findViewById(R.id.switchloginuser);
+
 
         mAuth=FirebaseAuth.getInstance();
         db=FirebaseFirestore.getInstance();
@@ -117,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                 binding.cardView3.setAnimation(fade_in);
                 binding.text.setAnimation(fade_in);
                 binding.registerText.setAnimation(fade_in);
+                binding.adminText.setAnimation(fade_in);
                 binding.cardView.setAnimation(fade_in);
             }
         };
@@ -136,28 +142,37 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
+    admin.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent i=new Intent(LoginActivity.this,Adminlogin.class);
+            startActivity(i);
+            finish();
+        }
+    });
 
         if (mAuth.getCurrentUser() != null) {
-
             try {
                 String userId=mAuth.getCurrentUser().getUid();
-                DocumentReference documentReference=db.collection("users").document(userId);
-                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                        String userType = value.getString("userType");
-
-                        if (userType.equals("admin")) {
-                            Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
-                            startActivity(intent);
-                        } else if (userType.equals("user")) {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                DocumentReference documentReference=db.collection("users").document(userId);
+//                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+//                        String userType = value.getString("userType");
+//
+//                        if (userType.equals("admin")) {
+//                            Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+//                            startActivity(intent);
+//                        } else if (userType.equals("user")) {
+//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    }
+//                });
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
-                        }
-                    }
-                });
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -204,29 +219,36 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    try {
-                                         userId = mAuth.getCurrentUser().getUid();
-                                        DocumentReference documentReference = db.collection("users").document(userId);
-                                        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                                                 userType = value.getString("userType");
-                                                Log.d("userType", userType);
-                                                if (userType.equals("admin")) {
-                                                    Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                } else if (userType.equals("user")) {
-                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                            }
-                                        });
-                                    }catch(Exception e){
-                                        e.printStackTrace();
-                                    }
+                                        try {
+                                            userId = mAuth.getCurrentUser().getUid();
+//                                            DocumentReference documentReference = db.collection("users").document(userId);
+//                                            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//                                                @Override
+//                                                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+//
+//                                                    userType = value.getString("userType");
+//                                                    if (userType.equals("admin")) {
+//                                                        Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+//                                                        startActivity(intent);
+//                                                        finish();
+//                                                    } else if (userType.equals("user")) {
+//                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                                        startActivity(intent);
+//                                                        finish();
+//                                                    }
+//                                                }
+//                                            });
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+
+
 
 
 

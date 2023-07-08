@@ -29,65 +29,92 @@
         android:background="@drawable/form_background_admin"
         >
 
-        <EditText
-            android:id="@+id/store_Name"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/selectGamesCard"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:textStyle="italic"
+            app:cardElevation="10dp"
             android:layout_marginBottom="20dp"
-            android:hint="STORE NAME"
-            android:textSize="22dp" />
+            app:cardBackgroundColor="#D6D6D6"
+         >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:hint="Select the games"
+                    android:textSize="22dp" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <EditText
-            android:id="@+id/contact"
+            android:id="@+id/screencount"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:textStyle="italic"
             android:layout_marginBottom="20dp"
-            android:hint="Contact"
             android:ems="10"
-            android:inputType="phone"
-            android:textSize="22dp" />
+            android:hint="screen count"
+            android:inputType="number"
+            android:textSize="22dp"
+            android:textStyle="italic" />
 
 
         <EditText
-            android:id="@+id/address"
+            android:id="@+id/ps5count"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginBottom="20dp"
-            android:hint="ADDRESS"
-            android:textStyle="italic"
-            android:textSize="22dp" />
+            android:hint="PS5 count"
+            android:inputType="number"
+            android:textSize="22dp"
+            android:textStyle="italic" />
 
         <EditText
-            android:id="@+id/city"
+            android:id="@+id/ps4count"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginBottom="20dp"
-            android:hint="CITY"
-            android:textStyle="italic"
-            android:textSize="22dp" />
+            android:hint="PS4 count"
+            android:inputType="number"
+            android:textSize="22dp"
+            android:textStyle="italic" />
 
         <EditText
-            android:id="@+id/state"
+            android:id="@+id/xboxcount"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginBottom="20dp"
-            android:hint="STATE"
-            android:textStyle="italic"
-            android:textSize="22dp" />
+            android:hint="Xbox count"
+            android:textSize="22dp"
+            android:inputType="number"
+            android:textStyle="italic" />
 
         <EditText
-            android:id="@+id/pincode"
+            android:id="@+id/poolcount"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginBottom="20dp"
-            android:textStyle="italic"
-            android:hint="PINCODE"
             android:ems="10"
-            android:inputType="textPostalAddress"
-            android:textSize="22dp" />
+            android:inputType="number"
+            android:hint="8BallPool count"
+            android:textSize="22dp"
+            android:textStyle="italic" />
 
 
     </LinearLayout>

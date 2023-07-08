@@ -99,17 +99,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/p_white">
-                
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
-                android:text="Login"
-                android:textColor="@color/p_black"
-                android:textSize="40dp"
-                android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="50dp"
+                    android:text="Admin Login"
+                    android:textColor="@color/p_black"
+                    android:textSize="40dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -229,7 +229,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/adminText"
+        android:id="@+id/loginText"
         android:layout_width="235dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
@@ -244,7 +244,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin"
+            android:text="Login"
             android:textColor="@color/primary"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -282,7 +282,6 @@
         app:layout_constraintVertical_bias="0.0"
         android:background="@drawable/register_button_background"
         >
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

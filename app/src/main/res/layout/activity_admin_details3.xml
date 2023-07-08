@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:cardBackgroundColor="#9C9C9C"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="SECONDARY DETAILS"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            android:textSize="30dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="522dp"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:background="@drawable/form_background_admin"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10sp"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/store_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold|italic"
+            android:hint="ADD STORE IMAGES"
+            android:textSize="22dp" />
+        <Button
+            android:id="@+id/choose_Images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:backgroundTint="@color/black"/>
+
+
+
+
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/finish_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/cardview_dark_background"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="FINISH"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:gravity="center"/>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
