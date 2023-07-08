@@ -20,7 +20,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,12 +50,19 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
     FirebaseFirestore db;
     TextView storeName,storeAddress,status;
     ImageView storeImage;
+    TextView controllers;
+    TextView gamesChoosen;
     CardView setDate;
     CardView setTime;
     CardView continue_btn;
+    CardView select_controller;
+    CardView select_game;
     TextView selectDate,selectTime;
     Dialog dialog;
     FloatingActionButton nextbtn;
+    boolean dateset,timeset,controllerset,gameset;
+
+    int Id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +83,15 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
         setDate = findViewById(R.id.set_dateBtn);
         setTime = findViewById(R.id.set_timeBtn);
         nextbtn = findViewById(R.id.play_game_icon);
+        select_controller = findViewById(R.id.select_controller);
+        select_game = findViewById(R.id.select_game);
+        gamesChoosen = findViewById(R.id.game);
+        controllers = findViewById(R.id.controller);
 
+        dateset = false;
+        timeset = false;
+        controllerset = false;
+        gameset = false;
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,18 +99,48 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
                 String time = selectTime.getText().toString();
                 Intent intent = new Intent(BookScreen.this, BookGames.class);
                 Bundle bundle1 = new Bundle();
-                bundle1.putString("date",date);
-                bundle1.putString("time",time);
-                startActivity(intent);
+                if(dateset&&timeset&&controllerset){
+                    bundle1.putString("date",date);
+                    bundle1.putString("time",time);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getBaseContext(),"set the necessary details",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePicker mDatePickerDialogFragment;
-                mDatePickerDialogFragment = new DatePicker();
-                mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
+
+                DatePickerDialog datePickerDialog;
+
+                // Get the current date
+                Calendar today = Calendar.getInstance();
+
+                // Create the DatePickerDialog
+                datePickerDialog = new DatePickerDialog(BookScreen.this, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        selectDate.setText(dayOfMonth+"/"+month+"/"+year);
+                        dateset = true;
+                    }
+                },
+                        today.get(Calendar.YEAR),
+                        today.get(Calendar.MONTH),
+                        today.get(Calendar.DAY_OF_MONTH)
+                );
+
+                // Set the mindatePickerDialog.getDatePicker().setMinDate(today.getTimeInMillis());imum date to today's date
+
+                Calendar maxDate = Calendar.getInstance();
+                maxDate.add(Calendar.DAY_OF_MONTH, 10);
+                datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
+
+                // Show the DatePickerDialog
+                datePickerDialog.show();
+
             }
         });
 
@@ -101,6 +149,22 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
             @Override
             public void onClick(View v) {
                 showDialog();
+
+            }
+        });
+
+        select_controller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogController();
+
+            }
+        });
+        select_game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogGames();
+                gameset = true;
             }
         });
 
@@ -111,16 +175,54 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
         getNearByStoreImages();
 
     }
+
     String duration1,time1;
+
+    private void showDialogController(){
+       Dialog controllerDialog = new Dialog(this);
+       controllerDialog.setContentView(R.layout.controller_dialog);
+       controllerDialog.show();
+       RadioGroup radioGroup = controllerDialog.findViewById(R.id.controller_option);
+       Button done  = controllerDialog.findViewById(R.id.done);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                controllerset = true;
+                RadioButton radioButton = group.findViewById(checkedId);
+                String selectedText = radioButton.getText().toString();
+                controllers.setText(selectedText);
+            }
+        });
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controllerDialog.dismiss();
+            }
+        });
+    }
+
+    private void showDialogGames(){
+
+    }
+
     private void showDialog() {
+
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.select_time_slot);
         dialog.setCancelable(false);
         dialog.show();
         AutoCompleteTextView duration = dialog.findViewById(R.id.duration);
         AutoCompleteTextView timeSlot = dialog.findViewById(R.id.time_slot);
-        String[] durations = {"1","2","3","4","5","6","7","8","9","10"};
-        String[] timeslots = {"9-10","10-11","11-12","12-1","1-2","2-3","3-4","4-5","5-6","6-7"};
+        ArrayList<String> durations = new ArrayList<>();
+        ArrayList<String> timeslots = new ArrayList<>();
+
+        for(int i=1;i<=10;i++){
+            durations.add(String.valueOf(i));
+        }
+
+        for(int i=1;i<=10;i++){
+
+        }
         ArrayAdapter<String> durationadapter = new ArrayAdapter<>(this,R.layout.list_item, durations);
         duration.setAdapter(durationadapter);
         ArrayAdapter<String> timeslotadapter = new ArrayAdapter<>(this,R.layout.list_item, timeslots);
@@ -147,6 +249,7 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
             @Override
             public void onClick(View v) {
                 selectTime.setText("dur:"+duration1+",slot:"+time1);
+                timeset = true;
                 dialog.dismiss();
             }
         });
@@ -184,9 +287,6 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
             }
         });
     }
-
-
-
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
         Calendar mCalendar = Calendar.getInstance();
