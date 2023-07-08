@@ -9,7 +9,7 @@
 
     </style>
     <style name="Shape" parent="">
-        <item name="cornerSize">5%</item>
+        <item name="cornerSize">20dp</item>
     </style>
     <style name="Shape1" parent="">
         <item name="cornerSize">15dp</item>

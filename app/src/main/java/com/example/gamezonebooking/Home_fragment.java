@@ -136,8 +136,7 @@ public class Home_fragment extends Fragment {
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setCancelable(false);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                 view  = getActivity().getLayoutInflater().inflate(R.layout.layout_custom_dialog, null);
+                view  = getActivity().getLayoutInflater().inflate(R.layout.layout_custom_dialog, null);
                 dialog.setContentView(view);
 
                 yesBtn=view.findViewById(R.id.btnyes);
@@ -285,7 +284,7 @@ if(slideModelList.size()==0) {
         Log.d("screen Size", String.valueOf(height));
 
         // Get the screen height in pixels
-        allStoreRecyclerview.setMinimumHeight(allStores.size() * (height)/2);
+        allStoreRecyclerview.setMinimumHeight(allStores.size() * (height+100)/2);
         allStoreRecyclerview.setAdapter(allStoreRecyclerViewAdapter);
         allStoreRecyclerview.setNestedScrollingEnabled(false);
         allStoreRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
