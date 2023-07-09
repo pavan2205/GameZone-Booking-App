@@ -85,6 +85,7 @@
                     android:layout_marginBottom="0dp"
                     android:background="@drawable/bottom_back">
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/checkout_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="20dp"
@@ -92,9 +93,10 @@
                         app:cardElevation="25dp"
                         >
                         <TextView
+                            android:id="@+id/checkout_text"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Continue"
+                            android:text="Checkout"
                             android:textSize="30dp"
                             android:gravity="center"/>
                     </androidx.cardview.widget.CardView>
