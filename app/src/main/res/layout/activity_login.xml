@@ -137,6 +137,7 @@
                 android:background="@drawable/edit_text_background"
                 android:drawableStart="@drawable/outline_lock_24"
                 android:hint="  Password"
+                android:inputType="textPassword"
                 android:paddingStart="18dp" />
 
             <TextView
@@ -245,7 +246,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Admin"
-            android:textColor="@color/primary"
+            android:textColor="#00BCD4"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -289,7 +290,7 @@
             android:text="Register"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:textColor="@color/primary"
+            android:textColor="#00BCD4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

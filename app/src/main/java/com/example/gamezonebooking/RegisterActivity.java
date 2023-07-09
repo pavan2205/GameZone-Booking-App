@@ -46,23 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
                         startActivity(intent);
                         finish();
-//            DocumentReference documentReference=db.collection("users").document(userId);
-//            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-//                @Override
-//                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-//                    String userType=value.getString("userType");
-//                    Log.d("userType",userType);
-//                    if(userType.equals("admin")){
-//                        Intent intent=new Intent(RegisterActivity.this,AdminHomeActivity.class);
-//                        startActivity(intent);
-//                    }
-//                    else if(userType.equals("user")){
-//                        Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                }
-//            });
         }
     }
 
@@ -92,12 +75,6 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
-
-
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,7 +87,6 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     userType = "user";
                 }
-
 
                 Log.d("user", String.valueOf(userSwitch.isChecked()));
 
@@ -147,8 +123,6 @@ public class RegisterActivity extends AppCompatActivity {
                     });
 
                 }else{
-
-
                 mAuth.createUserWithEmailAndPassword(emails, passwords)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override

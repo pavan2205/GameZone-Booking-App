@@ -67,24 +67,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser=mAuth.getCurrentUser();
         Log.d("currentUser", String.valueOf(currentUser));
         if(currentUser!=null){
-//            String userId=mAuth.getCurrentUser().getUid();
-//            DocumentReference documentReference=db.collection("users").document(userId);
-//            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-//                @Override
-//                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-//                    String userType=value.getString("userType");
-//                    Log.d("userType",userType);
-//                    if(userType.equals("admin")){
-//                        Intent intent=new Intent(LoginActivity.this,AdminHomeActivity.class);
-//                        startActivity(intent);
-//                    }
-//                    else if(userType.equals("user")){
-//                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                }
-//            });
             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -163,21 +145,6 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-//                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-//                        String userType = value.getString("userType");
-//
-//                        if (userType.equals("admin")) {
-//                            Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
-//                            startActivity(intent);
-//                        } else if (userType.equals("user")) {
-//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                        }
-//                    }
-//                });
 
             }catch(Exception e){
                 e.printStackTrace();
@@ -204,11 +171,6 @@ public class LoginActivity extends AppCompatActivity {
                 passwords=String.valueOf(password.getText());
 
 
-
-
-
-
-
                 if(TextUtils.isEmpty(emails)){
                     Toast.makeText(LoginActivity.this,"Enter email",Toast.LENGTH_SHORT).show();
                     return;
@@ -229,23 +191,23 @@ public class LoginActivity extends AppCompatActivity {
                                         try {
                                             userId = mAuth.getCurrentUser().getUid();
                                             Log.d("email",userId);
-//                                            DocumentReference documentReference = db.collection("users").document(userId);
-//                                            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-//                                                @Override
-//                                                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-//
-//                                                    userType = value.getString("userType");
-//                                                    if (userType.equals("admin")) {
-//                                                        Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
-//                                                        startActivity(intent);
-//                                                        finish();
-//                                                    } else if (userType.equals("user")) {
-//                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                                        startActivity(intent);
-//                                                        finish();
-//                                                    }
-//                                                }
-//                                            });
+                                            DocumentReference documentReference = db.collection("users").document(userId);
+                                            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                                                    userType = value.getString("userType");
+                                                    if (userType.equals("admin")) {
+                                                        Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else if (userType.equals("user")) {
+                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
+                                                }
+                                            });
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                         startActivity(intent);
                                                         finish();

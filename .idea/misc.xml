@@ -17,6 +17,7 @@
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/form_background_admin.xml" value="0.205" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/homepage_background.xml" value="0.195" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1485" />
+        <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/person.xml" value="0.195" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/play_background.xml" value="0.12" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/profile_background.xml" value="0.1" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/thumb.xml" value="0.262" />
@@ -34,7 +35,7 @@
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_login.xml" value="0.16" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_main.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_razor_payment.xml" value="0.1" />
-        <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_register.xml" value="0.176" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_splash_screen.xml" value="0.16217105263157894" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/controller_dialog.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/dialog_forgot.xml" value="0.264" />

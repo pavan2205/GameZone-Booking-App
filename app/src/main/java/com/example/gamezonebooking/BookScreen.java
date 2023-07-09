@@ -68,6 +68,7 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
     TextView selectDate,selectTime;
     Dialog dialog;
     String consoleType;
+    TextView addre;
     FloatingActionButton nextbtn;
     boolean dateset,timeset,controllerset,gameset;
     ArrayList<String> durations = new ArrayList<>();
@@ -87,6 +88,7 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
         String address = bundle.getString("address");
         String openOrClose = bundle.getString("openOrClose");
         gamesList=bundle.getStringArrayList("games");
+
         storeImage = findViewById(R.id.store_image);
         storeName = findViewById(R.id.store_name);
         storeAddress = findViewById(R.id.store_address);
@@ -100,6 +102,8 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
         select_game = findViewById(R.id.select_game);
         gamesChoosen = findViewById(R.id.game);
         controllers = findViewById(R.id.controller);
+        addre=findViewById(R.id.adres);
+        addre.setText(address);
 
         dateset = false;
         timeset = false;

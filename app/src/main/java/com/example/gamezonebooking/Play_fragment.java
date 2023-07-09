@@ -26,11 +26,7 @@ import com.yalantis.library.Koloda;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Play_fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Play_fragment extends Fragment {
     private SwiperAdapter swiperAdapter;
     private List<String> list;
@@ -39,8 +35,7 @@ public class Play_fragment extends Fragment {
     ShapeableImageView gamesImg;
     Koloda bookbtn;
     Koloda koloda;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -54,19 +49,6 @@ public class Play_fragment extends Fragment {
     public Play_fragment() {
         // Required empty public constructor
     }
-
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment play_game_fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-
-
     public static Play_fragment newInstance(String param1, String param2) {
         Play_fragment fragment = new Play_fragment();
         Bundle args = new Bundle();
@@ -75,7 +57,6 @@ public class Play_fragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,27 +65,20 @@ public class Play_fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_play_game_fragment, container, false);
-
         koloda = view.findViewById(R.id.koloda);
         reload = view.findViewById(R.id.reload);
         gamesImg=view.findViewById(R.id.games_Img);
-
         bookbtn=view.findViewById(R.id.koloda);
-
         db=FirebaseFirestore.getInstance();
         list = new ArrayList<String>();
         gamesDetails=new ArrayList<games>();
-
         fetchGames(this.getContext());
         Log.d("tag", String.valueOf(list.size()));
-
-
         bookbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,17 +87,14 @@ public class Play_fragment extends Fragment {
                 view.getContext().startActivity(intent);
             }
         });
-
         reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 koloda.reloadAdapterData();
             }
         });
-
         return view;
     }
-
     private  void fetchGames(Context context){
         db.collection("games").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -139,8 +110,6 @@ public class Play_fragment extends Fragment {
                         list.add(dc.getDocument().toObject(games.class).img);
                     }
                 }
-
-
                 swiperAdapter = new SwiperAdapter(context,gamesDetails);
                 koloda.setAdapter(swiperAdapter);
                 listen l = new listen(context, gamesDetails);
@@ -149,6 +118,4 @@ public class Play_fragment extends Fragment {
             }
         });
     }
-
-
 }

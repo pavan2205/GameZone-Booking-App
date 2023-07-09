@@ -160,6 +160,7 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableStart="@drawable/outline_lock_24"
+                android:inputType="textPassword"
                 android:hint="  Password"
                 android:paddingStart="18dp" />
 
@@ -169,6 +170,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:inputType="textPassword"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableStart="@drawable/outline_email_24"
@@ -195,77 +197,16 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="430dp"
-        android:layout_marginEnd="30dp"
-        app:cardCornerRadius="100dp"
-        app:cardElevation="21dp"
-
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
-
-        <ImageView
-            android:id="@+id/googlebtn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/p_white"
-            android:padding="5dp"
-            android:src="@drawable/google_logo" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="60dp"
-        app:cardCornerRadius="100dp"
-
-        app:cardElevation="21dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView3"
-        app:layout_constraintEnd_toStartOf="@+id/cardView3"
-        app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="@+id/cardView3">
-
-        <ImageView
-            android:background="@color/p_white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            android:src="@drawable/meta_logo" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="60dp"
-        app:cardCornerRadius="100dp"
-        app:cardElevation="21dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView3"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
-        app:layout_constraintStart_toEndOf="@+id/cardView3"
-        app:layout_constraintTop_toTopOf="@+id/cardView3">
-
-        <ImageView
-            android:background="@color/p_white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            android:src="@drawable/twitter_logo" />
-    </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/login"
         android:layout_width="235dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/register_button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
-        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="@+id/cardView">
 
         <TextView
@@ -273,7 +214,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:textColor="@color/primary"
+            android:textColor="#00BCD4"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

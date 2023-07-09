@@ -90,18 +90,8 @@ public class Home_fragment extends Fragment {
     private  View view;
 
     public Home_fragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment home_fragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    }
     public static Home_fragment newInstance(String param1, String param2) {
         Home_fragment fragment = new Home_fragment();
         Bundle args = new Bundle();
@@ -184,25 +174,10 @@ public class Home_fragment extends Fragment {
             }
         });
 
-
-
-//        slideModelList.add(new SlideModel("https://www.heypoorplayer.com/wp-content/uploads/2023/03/WWE-2k23.png"));
-//        slideModelList.add(new SlideModel("https://www.global-esports.news/wp-content/uploads/2022/09/FIFA-23.png"));
-//        slideModelList.add(new SlideModel("https://deadline.com/wp-content/uploads/2022/03/EGS_GodofWar_SantaMonicaStudio_S2_1200x1600-fbdf3cbc2980749091d52751ffabb7b7_1200x1600-fbdf3cbc2980749091d52751ffabb7b7-e1646683029138.jpeg"));
-//        slideModelList.add(new SlideModel("https://assets.mspimages.in/gear/wp-content/uploads/2022/11/GTA_Rockstar_Explained.png"));
-//        slideModelList.add(new SlideModel("https://www.adrenaline.com.br/wp-content/plugins/seox-image-magick/imagick_convert.php?width=1200&height=545&format=webp&quality=91&imagick=/wp-content/uploads/2022/08/the-last-of-us-part-i_2.jpg"));
-
-
         return view;
     }
 
-    private void ShowCustomDialogBox(View view) {
-
-    }
-
     private void getNearByStoreImages(){
-
-
 
         db.collection("gameposters").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -217,7 +192,6 @@ public class Home_fragment extends Fragment {
                         posterurls.add(dc.getDocument().toObject(posterUrlsList.class));
                     }
                 }
-
 
 if(slideModelList.size()==0) {
     for (posterUrlsList urls : posterurls) {

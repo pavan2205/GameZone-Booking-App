@@ -117,15 +117,10 @@ Log.d("email",userId);
                   Log.e("firestore error", error.getMessage());
                   return;
               }
-
-
              userEmail=value.getString("email");
 
           }
       });
-
-
-
         backbtn = findViewById(R.id.back_button);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,28 +129,18 @@ Log.d("email",userId);
                 finish();
             }
         });
-
         checkout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 bookingsModel bm=new bookingsModel(storename,totalamount, (int) ((int)totalamount/controlleramt),selectedGame,consoleType,date,duration,time,screens,userEmail);
-
                 db.collection("bookings").add(bm).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         makePayment();
                     }
                 });
-
-
-
             }
         });
-
-
-
     }
     int qnt = 0;
     double currentamt = 0.0;
@@ -177,7 +162,6 @@ Log.d("email",userId);
                 dialog.dismiss();
             }
         });
-
         TextView incribtn,decribtn,amount;
         TextView quantity;
         quantity = dialog.findViewById(R.id.quantity);
@@ -216,26 +200,15 @@ Log.d("email",userId);
                 amount.append(" Rs");
             }
         });
-
-
-
     }
     @SuppressLint("RestrictedApi")
     private void makePayment() {
-
         Checkout checkout = new Checkout();
-
         checkout.setKeyID("rzp_test_Yqibtm3RGt8pkC");
-
         checkout.setImage(R.drawable.logo);
         final Activity activity = this;
-
-        /**
-         * Pass your payment options to the Razorpay Checkout as a JSONObject
-         */
         try {
             JSONObject options = new JSONObject();
-
             options.put("name", "Pavan G Naik");
             options.put("description", "Reference No. #123456");
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg");
@@ -249,22 +222,15 @@ Log.d("email",userId);
             retryObj.put("enabled", true);
             retryObj.put("max_count", 4);
             options.put("retry", retryObj);
-
             checkout.open(activity, options);
-
         } catch(Exception e) {
             Log.e(TAG, "Error in starting Razorpay Checkout", e);
         }
     }
-
     @Override
     public void onPaymentSuccess(String s) {
-
     }
-
     @Override
     public void onPaymentError(int i, String s) {
-
     }
-
 }
