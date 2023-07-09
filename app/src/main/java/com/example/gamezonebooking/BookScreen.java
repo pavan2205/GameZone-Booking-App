@@ -104,11 +104,24 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
             public void onClick(View v) {
                 String date = selectDate.getText().toString();
                 String time = selectTime.getText().toString();
+                String controller = controllers.getText().toString();
+                String games1[] = {"game1","game2","game3"};
                 Intent intent = new Intent(BookScreen.this, BookGames.class);
                 Bundle bundle1 = new Bundle();
+                double val = 0.000;
+                if(controller.contains("6")){
+                    val = 60.000;
+                }else if(controller.contains("8")){
+                    val = 80.000;
+                }else if(controller.contains("7")){
+                    val = 70.000;
+                }
                 if(dateset&&timeset&&controllerset){
                     bundle1.putString("date",date);
                     bundle1.putString("time",time);
+                    bundle1.putDouble("camt",val);
+                    bundle1.putStringArray("games",games1);
+                    intent.putExtras(bundle1);
                     startActivity(intent);
                 }else{
                     Toast.makeText(getBaseContext(),"set the necessary details",Toast.LENGTH_SHORT).show();
@@ -139,12 +152,13 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
                         today.get(Calendar.DAY_OF_MONTH)
                 );
 
-                // Set the mindatePickerDialog.getDatePicker().setMinDate(today.getTimeInMillis());imum date to today's date
+                // Set the minimum date to today's date
+                datePickerDialog.getDatePicker().setMinDate(today.getTimeInMillis());
+
 
                 Calendar maxDate = Calendar.getInstance();
                 maxDate.add(Calendar.DAY_OF_MONTH, 10);
                 datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
-
                 // Show the DatePickerDialog
                 datePickerDialog.show();
 
@@ -231,6 +245,7 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
         durations.add("2");
         durations.add("3");
         durations.add("4");
+
         ArrayAdapter<String> durationadapter = new ArrayAdapter<>(this,R.layout.list_item, durations);
         duration.setAdapter(durationadapter);
 
