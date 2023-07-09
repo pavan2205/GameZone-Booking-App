@@ -49,6 +49,7 @@ import java.util.List;
 
 
 public class BookScreen extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+
     List<SlideModel> store_images_carousel = new ArrayList<>();
      ArrayList<posterUrlsList> posterurls=new ArrayList<>();
      ArrayList<String> imageUrl;

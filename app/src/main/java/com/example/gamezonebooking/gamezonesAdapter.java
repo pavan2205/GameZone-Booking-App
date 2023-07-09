@@ -1,4 +1,6 @@
 package com.example.gamezonebooking;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,9 @@ import java.util.ArrayList;
 
 public class gamezonesAdapter extends RecyclerView.Adapter<gamezonesAdapter.ViewHolder> {
 
-     ArrayList<gamezones> gamezonesList;
+     ArrayList<AdminProfileModel> gamezonesList;
 
-    public gamezonesAdapter(ArrayList<gamezones> gamezonesList) {
+    public gamezonesAdapter(ArrayList<AdminProfileModel> gamezonesList) {
         this.gamezonesList=gamezonesList;
     }
 
@@ -33,11 +35,25 @@ public class gamezonesAdapter extends RecyclerView.Adapter<gamezonesAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull gamezonesAdapter.ViewHolder holder, int position) {
-         gamezones list= gamezonesList.get(position);
-         holder.gamzoneName.setText(list.name);
-         Picasso.get().load(list.getImage()).into(holder.storeImage);
+         AdminProfileModel list= gamezonesList.get(position);
+         holder.gamzoneName.setText(list.storename);
+         Picasso.get().load(list.images.get(0)).into(holder.storeImage);
          holder.location.setText(list.getAddress());
-         holder.status.setText(list.getStatus());
+         holder.status.setText("open");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), BookScreen.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name",list.storename);
+                bundle.putStringArrayList("image",list.images);
+                bundle.putStringArrayList("games",list.games);
+                bundle.putString("address",list.address);
+//                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

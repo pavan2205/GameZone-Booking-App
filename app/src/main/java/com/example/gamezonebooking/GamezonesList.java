@@ -31,7 +31,7 @@ public class GamezonesList extends AppCompatActivity {
     RecyclerView recyclerView;
     String id;
 
-    ArrayList<gamezones> gamezone;
+    ArrayList<AdminProfileModel> gamezone;
 
     public GamezonesList() {
 
@@ -79,9 +79,9 @@ public class GamezonesList extends AppCompatActivity {
 
                 for(DocumentChange dc:value.getDocumentChanges()){
                     if(dc.getType()==DocumentChange.Type.ADDED){
-                        gamezone.add(dc.getDocument().toObject(gamezones.class));
+                        gamezone.add(dc.getDocument().toObject(AdminProfileModel.class));
 
-                        Log.d("subcoll", String.valueOf(gamezone.get(0).getName()));
+                        //Log.d("subcoll", String.valueOf(gamezone.get(0).getName()));
                     }
                 }
 //                view1.setText(gamezone.get(0).getName().toString());

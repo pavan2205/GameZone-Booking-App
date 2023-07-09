@@ -27,6 +27,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class Adminlogin extends AppCompatActivity {
@@ -127,6 +128,8 @@ public class Adminlogin extends AppCompatActivity {
                 }
 
 
+                
+               
 
                 CollectionReference cref=db.collection("admins");
                 Query q1=cref.whereEqualTo("email",emails).whereEqualTo("password",passwords);
@@ -134,15 +137,24 @@ public class Adminlogin extends AppCompatActivity {
                 q1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        String details = null;
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            // Retrieve data from each document
+                            details = documentSnapshot.getString("details");
+                            Log.d("details",details);
+                            // Use the retrieved data
+                            if (details.equals("true")) {
+                                Intent i = new Intent(Adminlogin.this, AdminHomeActivity.class);
 
-
-                                   Intent i=new Intent(Adminlogin.this,AdminHomeActivity.class);
-                                   startActivity(i);
-                                   finish();
-                                }
-
-
-
+                                startActivity(i);
+                                finish();
+                            } else {
+                                Intent i = new Intent(Adminlogin.this, AdminHomeActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }
+                    }
                 });
             }
         });

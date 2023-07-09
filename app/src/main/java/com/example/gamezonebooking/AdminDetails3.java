@@ -30,8 +30,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -177,15 +181,35 @@ public class AdminDetails3 extends AppCompatActivity {
         Log.d("gamesList", String.valueOf(gamesList));
 
 
+
+
+
         finishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressDialog.setTitle("Creating Profile");
                 progressDialog.show();
+
+                AdminProfileModel adminProfileModel=new AdminProfileModel(store,contact,address,city,state,pincode,screencount,ps5count,ps4count,xboxcount,poolcount,gamesList,downloadImageUrl);
+
+                for (String game: gamesList) {
+                    DocumentReference documentRef = db.collection("games").document(game).collection("gamezones").document();
+                    documentRef.set(adminProfileModel)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        // Data added successfully to the subcollection for the current name
+                                    } else {
+                                        // Handle the exception
+                                    }
+                                }
+                            });
+                }
 //                progressDialog.setTitle("Uploading into firebase storage");
 //                progressDialog.show();
 
-                    AdminProfileModel adminProfileModel=new AdminProfileModel(store,contact,address,city,state,pincode,screencount,ps5count,ps4count,xboxcount,poolcount,gamesList,downloadImageUrl);
+
                     db.collection("Allgamezones").add(adminProfileModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -195,6 +219,25 @@ public class AdminDetails3 extends AppCompatActivity {
                     });
                 }
         });
+
+
+    }
+
+
+    private void addGamezonesToSubcollection(CollectionReference subcollectionRef, ArrayList<String> gamesLists) {
+        for (String game : gamesLists) {
+            subcollectionRef.add(game)
+                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(Task<DocumentReference> task) {
+                            if (task.isSuccessful()) {
+                                // Subcollection updated successfully
+                            } else {
+                                // Handle the exception
+                            }
+                        }
+                    });
+        }
     }
 
     @SuppressLint("Range")
