@@ -47,7 +47,7 @@ public class AdminHomeActivity extends AppCompatActivity {
 
     EditText storename,address,state,city,pincode,contact;
     TextView nextBtn;
-
+    String adminEmail;
     FirebaseFirestore db;
     ArrayList<String> AllGamesList;
     @Override
@@ -64,6 +64,8 @@ public class AdminHomeActivity extends AppCompatActivity {
         contact=findViewById(R.id.contact);
         AllGamesList=new ArrayList<>();
         db=FirebaseFirestore.getInstance();
+
+        adminEmail=getIntent().getStringExtra("adminEmail");
 
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +115,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                         getSharedPreferences("Your_app_name", 0);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("store", store);
+                editor.putString("adminEmail",adminEmail);
                 editor.putString("contact",contac);
                 editor.putString("address", addres);
                 editor.putString("state", stat);

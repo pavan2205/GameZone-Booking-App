@@ -144,12 +144,14 @@ public class Adminlogin extends AppCompatActivity {
                             Log.d("details",details);
                             // Use the retrieved data
                             if (details.equals("true")) {
-                                Intent i = new Intent(Adminlogin.this, AdminHomeActivity.class);
-
+                                Intent i = new Intent(Adminlogin.this, AdminMainActivity.class);
+                                i.putExtra("adminEmail",emails);
+                                Log.d("email",emails);
                                 startActivity(i);
                                 finish();
                             } else {
                                 Intent i = new Intent(Adminlogin.this, AdminHomeActivity.class);
+                                i.putExtra("adminEmail",emails);
                                 startActivity(i);
                                 finish();
                             }

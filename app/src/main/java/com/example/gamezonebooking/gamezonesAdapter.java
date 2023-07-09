@@ -49,7 +49,7 @@ public class gamezonesAdapter extends RecyclerView.Adapter<gamezonesAdapter.View
                 bundle.putStringArrayList("image",list.images);
                 bundle.putStringArrayList("games",list.games);
                 bundle.putString("address",list.address);
-//                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
+//              bundle.putString("openOrClose",store.openOrClose?"open":"closed");
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }

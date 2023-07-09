@@ -39,7 +39,7 @@
             android:name=".BookGames"
             android:exported="false" />
         <activity
-            android:name=".AdminDetails"
+            android:name=".AdminMainActivity"
             android:exported="false" />
         <activity
             android:name=".BookScreen"

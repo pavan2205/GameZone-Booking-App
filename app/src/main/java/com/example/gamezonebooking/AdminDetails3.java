@@ -66,6 +66,8 @@ public class AdminDetails3 extends AppCompatActivity {
     FirebaseFirestore db;
     StorageReference storageReference;
 
+    String adminEmail;
+
 
 
     @Override
@@ -172,6 +174,7 @@ public class AdminDetails3 extends AppCompatActivity {
         state=sharedPreferences.getString("state", "");
         city=sharedPreferences.getString("city", "");
         pincode=sharedPreferences.getString("pincode", "");
+        adminEmail=sharedPreferences.getString("adminEmail","");
         ps5count=i.getStringExtra("ps5");
         ps4count=i.getStringExtra("ps4");
         xboxcount=i.getStringExtra("xbox");
@@ -190,7 +193,7 @@ public class AdminDetails3 extends AppCompatActivity {
                 progressDialog.setTitle("Creating Profile");
                 progressDialog.show();
 
-                AdminProfileModel adminProfileModel=new AdminProfileModel(store,contact,address,city,state,pincode,screencount,ps5count,ps4count,xboxcount,poolcount,gamesList,downloadImageUrl);
+                AdminProfileModel adminProfileModel=new AdminProfileModel(store,contact,address,city,state,pincode,screencount,ps5count,ps4count,xboxcount,poolcount,gamesList,downloadImageUrl,adminEmail);
 
                 for (String game: gamesList) {
                     DocumentReference documentRef = db.collection("games").document(game).collection("gamezones").document();

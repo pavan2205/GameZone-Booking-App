@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class AdminProfileModel {
 
+    String email;
     String storename;
     String contact;
     String address;
@@ -20,7 +21,7 @@ public class AdminProfileModel {
 
     AdminProfileModel(){}
 
-    public AdminProfileModel(String storename, String contact, String address, String city, String state, String pincode, String screencount, String ps5count, String ps4count, String xboxcount, String poolcount, ArrayList<String> games, ArrayList<String> images) {
+    public AdminProfileModel(String storename, String contact, String address, String city, String state, String pincode, String screencount, String ps5count, String ps4count, String xboxcount, String poolcount, ArrayList<String> games, ArrayList<String> images,String email) {
         this.storename = storename;
         this.contact = contact;
         this.address = address;
@@ -34,6 +35,15 @@ public class AdminProfileModel {
         this.poolcount = poolcount;
         this.games = games;
         this.images = images;
+        this.email=email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getStorename() {
