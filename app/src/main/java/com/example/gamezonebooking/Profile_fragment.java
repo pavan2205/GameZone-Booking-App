@@ -1,12 +1,18 @@
 package com.example.gamezonebooking;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -25,9 +31,28 @@ public class Profile_fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ImageView profile_image;
 
+    private static final int GALLERY_REQUEST_CODE = 1;
 
+    public void selectImageFromGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE);
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+
+            // Set the selected image to the ImageView
+            ImageView profilePicture = getView().findViewById(R.id.profile_image_1);
+            profilePicture.setImageURI(selectedImageUri);
+        }
+    }
     public Profile_fragment() {
         // Required empty public constructor
     }
@@ -62,9 +87,16 @@ public class Profile_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
+        profile_image = view.findViewById(R.id.profile_image_1);
+        profile_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImageFromGallery();
+            }
+        });
+        return view;
     }
+
+
 }
