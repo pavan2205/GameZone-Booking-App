@@ -225,7 +225,7 @@ public class AdminDetails3 extends AppCompatActivity {
             Uri imageUri = imageUriList.get(i);
             String fileName = "image_" + i + ".jpg";
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            storageReference = storageRef.child("images/" + fileName);
+            storageReference = storageRef.child("images/" +System.currentTimeMillis()+fileName);
 
             UploadTask uploadTask = storageReference.putFile(imageUri);
             int finalI = i;

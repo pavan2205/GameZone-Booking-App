@@ -1,4 +1,5 @@
 package com.example.gamezonebooking;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.firestore.DocumentChange;
@@ -32,6 +34,7 @@ import java.util.List;
 public class Play_fragment extends Fragment {
     private SwiperAdapter swiperAdapter;
     private List<String> list;
+    Button reload;
     private ArrayList<games> gamesDetails;
     ShapeableImageView gamesImg;
     Koloda bookbtn;
@@ -89,6 +92,7 @@ public class Play_fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_play_game_fragment, container, false);
 
         koloda = view.findViewById(R.id.koloda);
+        reload = view.findViewById(R.id.reload);
         gamesImg=view.findViewById(R.id.games_Img);
 
         bookbtn=view.findViewById(R.id.koloda);
@@ -110,10 +114,14 @@ public class Play_fragment extends Fragment {
             }
         });
 
-
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                koloda.reloadAdapterData();
+            }
+        });
 
         return view;
-
     }
 
     private  void fetchGames(Context context){
@@ -133,7 +141,7 @@ public class Play_fragment extends Fragment {
                 }
 
 
-                swiperAdapter = new SwiperAdapter(context,list);
+                swiperAdapter = new SwiperAdapter(context,gamesDetails);
                 koloda.setAdapter(swiperAdapter);
                 listen l = new listen(context, gamesDetails);
                 koloda.setKolodaListener(l);

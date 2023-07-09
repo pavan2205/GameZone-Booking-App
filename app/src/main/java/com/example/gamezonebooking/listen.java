@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 public class listen implements KolodaListener {
     private Context context;
+    private Koloda koloda;
     private ArrayList<games> gamesDetails;
     GamezonesList gamezonesList;
 
@@ -39,7 +41,10 @@ public class listen implements KolodaListener {
 
     @Override
     public void onCardDrag(int i, @NonNull View view, float v) {
-
+        if(i+1 == gamesDetails.size()-1){
+         view.setTranslationX(0);
+         view.setTranslationY(0);
+        }
     }
 
     @Override
@@ -64,11 +69,13 @@ public class listen implements KolodaListener {
     @Override
     public void onCardSwipedLeft(int i) {
 
+        Log.d("indexno",String.valueOf(i));
     }
 
     @Override
     public void onCardSwipedRight(int i) {
 
+        Log.d("indexno",String.valueOf(i));
     }
 
     @Override
@@ -88,6 +95,5 @@ public class listen implements KolodaListener {
 
     @Override
     public void onNewTopCard(int i) {
-
     }
 }

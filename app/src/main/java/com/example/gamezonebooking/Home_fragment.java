@@ -33,6 +33,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.android.volley.Cache;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -80,6 +81,8 @@ public class Home_fragment extends Fragment {
     FirebaseFirestore db;
 
     ProgressDialog progressDialog;
+    RecycleViewAdapter adapter;
+    AllStoreRecyclerViewAdapter allStoreRecyclerViewAdapter;
 
     List<SlideModel> slideModelList = new ArrayList<>();
 
@@ -120,6 +123,17 @@ public class Home_fragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        adapter = new RecycleViewAdapter(allStores,view.getContext());
+        allStoreRecyclerViewAdapter=new AllStoreRecyclerViewAdapter(allStores,view.getContext());
+        initRecyclerView(view);
+        getNearByStoreImages();
+        getAllStoreImages();
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -132,6 +146,8 @@ public class Home_fragment extends Fragment {
 
 
         db=FirebaseFirestore.getInstance();
+         adapter = new RecycleViewAdapter(allStores,view.getContext());
+        allStoreRecyclerViewAdapter=new AllStoreRecyclerViewAdapter(allStores,view.getContext());
 
 
         signoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -142,8 +158,7 @@ public class Home_fragment extends Fragment {
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setCancelable(false);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                 view  = getActivity().getLayoutInflater().inflate(R.layout.layout_custom_dialog, null);
+                view  = getActivity().getLayoutInflater().inflate(R.layout.layout_custom_dialog, null);
                 dialog.setContentView(view);
 
                 yesBtn=view.findViewById(R.id.btnyes);
@@ -170,8 +185,6 @@ public class Home_fragment extends Fragment {
         });
 
 
-        getNearByStoreImages();
-        getAllStoreImages();
 
 //        slideModelList.add(new SlideModel("https://www.heypoorplayer.com/wp-content/uploads/2023/03/WWE-2k23.png"));
 //        slideModelList.add(new SlideModel("https://www.global-esports.news/wp-content/uploads/2022/09/FIFA-23.png"));
@@ -226,29 +239,26 @@ if(slideModelList.size()==0) {
 
 
             if(allStores.size()==0) {
-                db.collection("Allgamezones").addSnapshotListener(new EventListener<QuerySnapshot>() {
-
+//
+                db.collection("Allgamezones").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error != null) {
-                            Log.e("Firestore error", error.getMessage());
-                            return;
-                        }
-
-                        for (DocumentChange dc : value.getDocumentChanges()) {
-                            if (dc.getType() == DocumentChange.Type.ADDED) {
-                                allStores.add(dc.getDocument().toObject(AdminProfileModel.class));
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(DocumentSnapshot ds:task.getResult()){
+                                allStores.add(ds.toObject(AdminProfileModel.class));
+                                adapter.notifyDataSetChanged();
+                                allStoreRecyclerViewAdapter.notifyDataSetChanged();
                             }
                         }
                     }
                 });
             }
 
-        initRecyclerView(view);
+
     }
 
 
-    private void initRecyclerView(@NonNull View view){
+    public void initRecyclerView(@NonNull View view){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -259,9 +269,9 @@ if(slideModelList.size()==0) {
         allStoreRecyclerview.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false));
 
         //nearest store
-        RecycleViewAdapter adapter = new RecycleViewAdapter(allStores,view.getContext());
+
         recyclerView.setAdapter(adapter);
-        AllStoreRecyclerViewAdapter allStoreRecyclerViewAdapter = new AllStoreRecyclerViewAdapter(allStores,view.getContext());
+
         //all stores
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -274,7 +284,7 @@ if(slideModelList.size()==0) {
         Log.d("screen Size", String.valueOf(height));
 
         // Get the screen height in pixels
-        allStoreRecyclerview.setMinimumHeight(allStores.size() * (height)/2);
+        allStoreRecyclerview.setMinimumHeight(allStores.size() * (height+100)/2);
         allStoreRecyclerview.setAdapter(allStoreRecyclerViewAdapter);
         allStoreRecyclerview.setNestedScrollingEnabled(false);
         allStoreRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {

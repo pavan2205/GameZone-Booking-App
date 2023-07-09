@@ -50,7 +50,8 @@ public class AllStoreRecyclerViewAdapter extends RecyclerView.Adapter<AllStoreRe
                 Intent intent = new Intent(v.getContext(), BookScreen.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("name",store.storename);
-                bundle.putString("image",store.images.get(0));
+                bundle.putStringArrayList("image",store.images);
+                bundle.putStringArrayList("games",store.games);
                 bundle.putString("address",store.address);
 //                bundle.putString("openOrClose",store.openOrClose?"open":"closed");
                 intent.putExtras(bundle);
