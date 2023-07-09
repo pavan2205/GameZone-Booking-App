@@ -22,6 +22,7 @@
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/thumb.xml" value="0.262" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/top_book_background.xml" value="0.1" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/drawable/track.xml" value="0.262" />
+        <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout-v28/activity_book_screen.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_admin_details.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_admin_details2.xml" value="0.1" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_admin_details3.xml" value="0.21077383497221033" />
@@ -35,6 +36,7 @@
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_razor_payment.xml" value="0.1" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_register.xml" value="0.4" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/activity_splash_screen.xml" value="0.16217105263157894" />
+        <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/controller_dialog.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/dialog_forgot.xml" value="0.264" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/fragment_home_fragment.xml" value="0.264" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/fragment_play_game_fragment.xml" value="0.24270833333333333" />
@@ -43,7 +45,10 @@
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/image_item.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/item_koloda.xml" value="0.264" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/layout_custom_dialog.xml" value="0.16" />
+        <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/list_item.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/nearest_store_card.xml" value="0.1675929884566054" />
+        <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/select_time_slot.xml" value="0.21077383497221033" />
+        <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/layout/selectgamesdialogr.xml" value="0.2099187687045746" />
         <entry key="..\:/Users/pavan/AndroidStudioProjects/GameZonebooking/app/src/main/res/menu/bottom_nav_menu.xml" value="0.10885416666666667" />
       </map>
     </option>
