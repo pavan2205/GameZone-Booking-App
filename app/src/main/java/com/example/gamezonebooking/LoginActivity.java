@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -130,16 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         handler.postDelayed(runnable,1000);
 
 
-        gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc= GoogleSignIn.getClient(this,gso);
 
-
-        googleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SignIn();
-            }
-        });
 
 
     admin.setOnClickListener(new View.OnClickListener() {
@@ -151,10 +143,26 @@ public class LoginActivity extends AppCompatActivity {
         }
     });
 
+
         if (mAuth.getCurrentUser() != null) {
             try {
                 String userId=mAuth.getCurrentUser().getUid();
-//                DocumentReference documentReference=db.collection("users").document(userId);
+                DocumentReference documentReference=db.collection("users").document(userId);
+                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    String username;
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                         username=value.getString("useremail");
+                        SharedPreferences sharedPreferences =
+                                getSharedPreferences("useremail", 0);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                         editor.putString("userEmail",username);
+                        editor.apply();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
 //                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 //                    @Override
 //                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -170,9 +178,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        }
 //                    }
 //                });
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -222,6 +228,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         try {
                                             userId = mAuth.getCurrentUser().getUid();
+                                            Log.d("email",userId);
 //                                            DocumentReference documentReference = db.collection("users").document(userId);
 //                                            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 //                                                @Override

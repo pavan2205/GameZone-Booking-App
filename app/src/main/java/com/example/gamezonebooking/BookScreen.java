@@ -67,6 +67,7 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
     CardView select_game;
     TextView selectDate,selectTime;
     Dialog dialog;
+    String consoleType;
     FloatingActionButton nextbtn;
     boolean dateset,timeset,controllerset,gameset;
     ArrayList<String> durations = new ArrayList<>();
@@ -110,7 +111,7 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
                 String date = selectDate.getText().toString();
                 String time = selectTime.getText().toString();
                 String controller = controllers.getText().toString();
-                String games1[] = {"game1","game2","game3"};
+                String games1=selectedgames;
                 Intent intent = new Intent(BookScreen.this, BookGames.class);
                 Bundle bundle1 = new Bundle();
                 double val = 0.000;
@@ -122,10 +123,14 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
                     val = 70.000;
                 }
                 if(dateset&&timeset&&controllerset){
+                    bundle1.putString("store",name);
+                    bundle1.putString("consoleType",consoleType);
                     bundle1.putString("date",date);
-                    bundle1.putString("time",time);
+                    //bundle1.putString("time",time);
                     bundle1.putDouble("camt",val);
-                    bundle1.putStringArray("games",games1);
+                    bundle1.putString("games",games1);
+                    bundle1.putString("duration",duration1);
+                    bundle1.putString("time",time1);
                     intent.putExtras(bundle1);
                     startActivity(intent);
                 }else{
@@ -216,6 +221,7 @@ public class BookScreen extends AppCompatActivity implements DatePickerDialog.On
                 controllerset = true;
                 RadioButton radioButton = group.findViewById(checkedId);
                 String selectedText = radioButton.getText().toString();
+                consoleType=radioButton.getText().toString();
                 controllers.setText(selectedText);
             }
         });
